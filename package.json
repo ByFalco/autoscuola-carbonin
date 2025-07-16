@@ -1,0 +1,23 @@
+{
+  "name": "autoscuola-carbonin",
+  "version": "1.0.0",
+  "description": "Sito web moderno per Autoscuola Carbonin con integrazione Google Places API",
+  "homepage": "https://autoscuola-carbonin.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/autoscuola-carbonin.git"
+  },
+  "keywords": [
+    "autoscuola",
+    "driving-school",
+    "website",
+    "google-places",
+    "vercel",
+    "github-actions"
+  ],
+  "author": "Autoscuola Carbonin",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

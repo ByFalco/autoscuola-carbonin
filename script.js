@@ -142,6 +142,7 @@ class SmoothScrolling {
 // ===== ACTIVE SECTION HIGHLIGHTING =====
 class ActiveSectionHighlighter {
     constructor() {
+        this.navList = $('.nav__list');
         this.init();
     }
 
@@ -151,6 +152,10 @@ class ActiveSectionHighlighter {
         }, 50);
 
         window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', debounce(() => {
+            this.updateActiveIndicator();
+        }, 100));
+        
         // Initial check
         this.highlightActiveSection();
     }
@@ -170,8 +175,37 @@ class ActiveSectionHighlighter {
                 navLinks.forEach(link => link.classList.remove('active-link'));
                 // Add active class to current link
                 correspondingLink?.classList.add('active-link');
+                // Update the animated indicator
+                this.updateActiveIndicator(correspondingLink);
             }
         });
+    }
+
+    updateActiveIndicator(activeLink = null) {
+        if (!this.navList) return;
+        
+        // Se non viene passato un link attivo, cerca quello corrente
+        if (!activeLink) {
+            activeLink = $('.nav__link.active-link');
+        }
+        
+        if (activeLink && this.navList.contains(activeLink)) {
+            const navListRect = this.navList.getBoundingClientRect();
+            const linkRect = activeLink.getBoundingClientRect();
+            
+            const leftOffset = linkRect.left - navListRect.left;
+            const width = linkRect.width;
+            
+            // Aggiorna la posizione e dimensione della linea
+            this.navList.style.setProperty('--indicator-left', `${leftOffset}px`);
+            this.navList.style.setProperty('--indicator-width', `${width}px`);
+            
+            // Mostra la linea
+            this.navList.classList.add('show-indicator');
+        } else {
+            // Nascondi la linea se non c'è un link attivo
+            this.navList.classList.remove('show-indicator');
+        }
     }
 }
 
@@ -499,7 +533,7 @@ class AccessibilityEnhancements {
             position: absolute;
             top: -40px;
             left: 6px;
-            background: #2563eb;
+            background: #dc2626;
             color: white;
             padding: 8px;
             text-decoration: none;
@@ -586,6 +620,98 @@ class AccessibilityEnhancements {
     }
 }
 
+// Places Data Manager - Carica dati dal file JSON locale
+class PlacesDataManager {
+    constructor() {
+        this.dataFile = './places-data.json';
+        this.fallbackData = {
+            rating: 4.9,
+            user_ratings_total: 2947
+        };
+    }
+
+    async init() {
+        console.log('🔄 Caricamento dati Places...');
+        
+        try {
+            const data = await this.loadPlacesData();
+            this.updateUI(data);
+            
+            // Mostra informazioni sull'ultimo aggiornamento
+            if (data.lastUpdated) {
+                const lastUpdate = new Date(data.lastUpdated);
+                console.log(`📅 Ultimo aggiornamento: ${lastUpdate.toLocaleString('it-IT')}`);
+                
+                if (data.nextUpdate) {
+                    const nextUpdate = new Date(data.nextUpdate);
+                    console.log(`🔄 Prossimo aggiornamento: ${nextUpdate.toLocaleString('it-IT')}`);
+                }
+            }
+            
+        } catch (error) {
+            console.error('❌ Errore nel caricamento dati:', error);
+            console.log('🔄 Utilizzo dati di fallback');
+            this.updateUI(this.fallbackData);
+        }
+    }
+
+    async loadPlacesData() {
+        try {
+            const response = await fetch(this.dataFile);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Verifica che i dati abbiano i campi necessari
+            if (typeof data.rating !== 'number' || typeof data.user_ratings_total !== 'number') {
+                throw new Error('Dati non validi nel file JSON');
+            }
+            
+            console.log('✅ Dati caricati dal file JSON');
+            return data;
+            
+        } catch (error) {
+            throw new Error(`Errore nel caricamento del file JSON: ${error.message}`);
+        }
+    }
+
+    updateUI(data) {
+        // Aggiorna il rating
+        const ratingElement = document.querySelector('.stat__number');
+        if (ratingElement) {
+            // Mantiene l'icona SVG e aggiorna solo il testo del rating
+            const svgIcon = ratingElement.querySelector('.stat__icon');
+            const svgHTML = svgIcon ? svgIcon.outerHTML : '';
+            ratingElement.innerHTML = `${svgHTML}${data.rating}/5`;
+        }
+
+        // Aggiorna il numero di recensioni
+        const reviewsElement = document.querySelector('.stat__label');
+        if (reviewsElement) {
+            const formattedCount = this.formatNumber(data.user_ratings_total);
+            reviewsElement.textContent = `(${formattedCount} recensioni)`;
+        }
+
+        console.log(`📊 UI aggiornata - Rating: ${data.rating}/5, Recensioni: ${data.user_ratings_total}`);
+        
+        // Mostra eventuale errore nell'ultimo aggiornamento
+        if (data.error) {
+            console.warn(`⚠️ Ultimo aggiornamento fallito: ${data.error}`);
+        }
+    }
+
+    formatNumber(num) {
+        // Formatta il numero per una migliore leggibilità
+        if (num >= 1000) {
+            return (num / 1000).toFixed(1).replace('.0', '') + 'k';
+        }
+        return num.toLocaleString();
+    }
+}
+
 // ===== INITIALIZATION =====
 class App {
     constructor() {
@@ -613,6 +739,7 @@ class App {
             new ScrollAnimations();
             new PerformanceOptimizer();
             new AccessibilityEnhancements();
+            new PlacesDataManager();
             
             console.log('✅ Autoscuola Carbonin website initialized successfully');
         } catch (error) {

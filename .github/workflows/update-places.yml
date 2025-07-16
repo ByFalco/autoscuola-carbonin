@@ -1,0 +1,39 @@
+name: Update Places Data
+
+on:
+  schedule:
+    # Esegue ogni giorno alle 6:00 UTC (8:00 CET)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Permette esecuzione manuale
+
+jobs:
+  update-places-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm install node-fetch@3.3.2
+    
+    - name: Update Places data
+      env:
+        GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        PLACE_ID: ${{ secrets.PLACE_ID }}
+      run: node update-places-data.js
+    
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add places-data.json
+        git diff --staged --quiet || git commit -m "🔄 Aggiornamento automatico dati Places API $(date +'%Y-%m-%d %H:%M')"
+        git push
