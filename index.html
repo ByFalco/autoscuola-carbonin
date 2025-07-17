@@ -35,7 +35,7 @@
                         <a href="#patenti" class="nav__link">Patenti</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#news" class="nav__link">News</a>
+                        <a href="#contact" class="nav__link">Contatti</a>
                     </li>
                 </ul>
                 <div class="nav__close" id="nav-close">
@@ -46,7 +46,7 @@
             </div>
             
             <div class="nav__actions">
-                <a href="#contatti" class="nav__cta-btn">
+                <a href="tel:+390123456789" class="nav__cta-btn nav__call-btn" onclick="handleContactAction(event)">
                     <svg class="nav__cta-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -54,7 +54,7 @@
                             <path d="m7.18 10.27 6.504 6.46c.697-.807 5.11-5.538 7.316.924 0 0-.232 3.346-4.994 3.346-3.367 0-6.851-4.038-9.29-6.346C4.626 12.692 3 10.154 3 7.846 3 3.116 6.252 3 6.252 3c7.432 2.538.929 7.27.929 7.27Z" fill="#ffffff"></path>
                         </g>
                     </svg>
-                    <span>Contattaci</span>
+                    <span class="nav__call-text">+39 0422 590972</span>
                 </a>
             </div>
             
@@ -113,9 +113,9 @@
                         Potrai <span class="highlight-description">recuperare punti</span>, rinnovare o richiedere duplicato della patente e gestire passaggi di proprietà e bolli.
                     </p>
                     <div class="home__buttons">
-                        <a href="#contatti" class="btn btn--primary">
+                        <a href="#contact" class="btn btn--primary">
                             <span class="btn__text">Inizia Ora</span>
-                            <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="btn__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
@@ -277,150 +277,127 @@
                 <div class="licenses__container">
                     <div class="license__card">
                         <div class="license__header">
-                            <h3 class="license__title">Patente B</h3>
+                            <h3 class="license__title">Patenti B</h3>
                             <div class="license__badge">Più Richiesta</div>
                         </div>
-                        <p class="license__description">Per guidare autoveicoli fino a 3,5 tonnellate</p>
+                        <p class="license__description">Per guidare autoveicoli fino a 3,5 tonnellate e 9 posti</p>
                         <ul class="license__features">
-                            <li>Corso teorico completo</li>
-                            <li>Lezioni di guida personalizzate</li>
+                            <li>Corso teorico</li>
+                            <li>Lezioni di guida</li>
                             <li>Gestione pratiche</li>
-                            <li>Supporto fino all'esame</li>
+                            <li>Assistenza esami</li>
                         </ul>
-                        <a href="#contatti" class="btn btn--outline">Maggiori Info</a>
+                        <a href="patenti/patenti-b.html" class="btn btn--outline">Maggiori Info</a>
                     </div>
                     <div class="license__card">
                         <div class="license__header">
-                            <h3 class="license__title">Patente A</h3>
+                            <h3 class="license__title">Patenti A</h3>
                         </div>
-                        <p class="license__description">Per guidare motocicli di tutte le cilindrate</p>
+                        <p class="license__description">Per guidare motocicli e ciclomotori</p>
                         <ul class="license__features">
-                            <li>Corso teorico specializzato</li>
-                            <li>Prove pratiche su pista</li>
-                            <li>Motocicli scuola disponibili</li>
+                            <li>Teoria motocicli</li>
+                            <li>Guide su strada</li>
+                            <li>Moto disponibili</li>
                             <li>Istruttori esperti</li>
                         </ul>
-                        <a href="#contatti" class="btn btn--outline">Maggiori Info</a>
+                        <a href="patenti/patenti-a.html" class="btn btn--outline">Maggiori Info</a>
                     </div>
                     <div class="license__card">
                         <div class="license__header">
                             <h3 class="license__title">Patenti Superiori</h3>
                         </div>
-                        <p class="license__description">C, D, E per veicoli commerciali e trasporto</p>
+                        <p class="license__description">C, D, DE per veicoli commerciali e trasporto</p>
                         <ul class="license__features">
-                            <li>Formazione professionale</li>
+                            <li>Formazione CQC</li>
                             <li>Veicoli commerciali</li>
-                            <li>CQC merci e persone</li>
-                            <li>Aggiornamenti periodici</li>
+                            <li>Trasporto merci</li>
+                            <li>Trasporto persone</li>
                         </ul>
-                        <a href="#contatti" class="btn btn--outline">Maggiori Info</a>
+                        <a href="patenti/patenti-superiori.html" class="btn btn--outline">Maggiori Info</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- News Section -->
-        <section class="news section" id="news">
+        <!-- Contact Section -->
+        <section class="contact section" id="contact">
             <div class="container">
                 <div class="section__header">
-                    <h2 class="section__title">News e Aggiornamenti</h2>
-                    <p class="section__subtitle">Rimani sempre informato sulle novità del settore</p>
-                </div>
-                <div class="news__container">
-                    <article class="news__card">
-                        <div class="news__date">15 Gen 2024</div>
-                        <h3 class="news__title">Nuove Normative Codice della Strada</h3>
-                        <p class="news__excerpt">
-                            Entrano in vigore le nuove disposizioni per la sicurezza stradale. 
-                            Scopri cosa cambia per gli esami di patente.
-                        </p>
-                        <a href="#" class="news__link">Leggi tutto →</a>
-                    </article>
-                    <article class="news__card">
-                        <div class="news__date">08 Gen 2024</div>
-                        <h3 class="news__title">Corsi Serali Disponibili</h3>
-                        <p class="news__excerpt">
-                            Nuovi orari per venire incontro alle esigenze di chi lavora. 
-                            Corsi teorici anche in orario serale.
-                        </p>
-                        <a href="#" class="news__link">Leggi tutto →</a>
-                    </article>
-                    <article class="news__card">
-                        <div class="news__date">02 Gen 2024</div>
-                        <h3 class="news__title">Promozione Gennaio</h3>
-                        <p class="news__excerpt">
-                            Sconto del 15% su tutti i corsi per patente B. 
-                            Offerta valida per tutto il mese di gennaio.
-                        </p>
-                        <a href="#" class="news__link">Leggi tutto →</a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contatti Section -->
-        <section class="contact section" id="contatti">
-            <div class="container">
-                <div class="section__header">
-                    <h2 class="section__title">Contattaci</h2>
-                    <p class="section__subtitle">Siamo qui per rispondere a tutte le tue domande</p>
+                    <h2 class="section__title">Contatti e Orari</h2>
+                    <p class="section__subtitle">Scopri come raggiungerci e contattarci per qualsiasi informazione sui nostri servizi</p>
                 </div>
                 <div class="contact__container">
                     <div class="contact__info">
                         <div class="contact__item">
-                            <div class="contact__icon">📍</div>
+                            <div class="contact__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div class="contact__content">
                                 <h4>Indirizzo</h4>
-                                <p>Via Roma, 123<br>12345 Città (PR)</p>
+                                <p>Viale Trento e Trieste, 10D 31100 Treviso (TV)</p>
                             </div>
                         </div>
                         <div class="contact__item">
-                            <div class="contact__icon">📞</div>
+                            <div class="contact__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27099 2.11999 4.18C2.095 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.59531 1.99522 8.06579 2.16708 8.43376 2.48353C8.80173 2.79999 9.04207 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.8939 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4135 11.5865 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div class="contact__content">
                                 <h4>Telefono</h4>
-                                <p>+39 0123 456789</p>
+                                <p>Tel: 0422 590972 • Cell: 339 118 9195</p>
                             </div>
                         </div>
                         <div class="contact__item">
-                            <div class="contact__icon">✉️</div>
+                            <div class="contact__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div class="contact__content">
                                 <h4>Email</h4>
                                 <p>info@autoscuolacarbonin.com</p>
                             </div>
                         </div>
                         <div class="contact__item">
-                            <div class="contact__icon">🕒</div>
+                            <div class="contact__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
                             <div class="contact__content">
                                 <h4>Orari</h4>
-                                <p>Lun-Ven: 9:00-19:00<br>Sab: 9:00-13:00</p>
+                                <div class="contact__hours">
+                                    <div class="hours__column">
+                                        <p>Lun: 9-12:15 / 15-19:15</p>
+                                        <p>Mar: 15-19</p>
+                                        <p>Mer: 9-12:15 / 15-19:30</p>
+                                    </div>
+                                    <div class="hours__column">
+                                        <p>Gio: 9-13</p>
+                                        <p>Ven: 9-12:15 / 15-19:30</p>
+                                        <p>Sab-Dom: Chiusi</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <form class="contact__form">
-                        <div class="form__group">
-                            <input type="text" class="form__input" placeholder="Nome e Cognome" required>
-                        </div>
-                        <div class="form__group">
-                            <input type="email" class="form__input" placeholder="Email" required>
-                        </div>
-                        <div class="form__group">
-                            <input type="tel" class="form__input" placeholder="Telefono">
-                        </div>
-                        <div class="form__group">
-                            <select class="form__input" required>
-                                <option value="">Seleziona il tipo di patente</option>
-                                <option value="patente-b">Patente B</option>
-                                <option value="patente-a">Patente A</option>
-                                <option value="patenti-superiori">Patenti Superiori</option>
-                                <option value="rinnovo">Rinnovo</option>
-                                <option value="altro">Altro</option>
-                            </select>
-                        </div>
-                        <div class="form__group">
-                            <textarea class="form__input form__textarea" placeholder="Messaggio" rows="5"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--full">Invia Messaggio</button>
-                    </form>
+                    <div class="contact__map">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11180.5!2d12.2436!3d45.6669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477935b1234567890%3A0x1234567890abcdef!2sViale%20Trento%20e%20Trieste%2C%2010D%2C%2031100%20Treviso%20TV%2C%20Italy!5e0!3m2!1sen!2sit!4v1234567890123!5m2!1sen!2sit"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </section>
@@ -431,10 +408,11 @@
         <div class="container">
             <div class="footer__content">
                 <div class="footer__section">
-                    <h3 class="footer__title">Autoscuola Carbonin</h3>
+                    <div class="footer__logo">
+                        <img src="imgs/logo.png" alt="Autoscuola Carbonin" class="footer__logo-img">
+                    </div>
                     <p class="footer__description">
-                        La tua scuola guida di fiducia da oltre 30 anni. 
-                        Professionalità, esperienza e risultati garantiti.
+                        Scuola guida professionale con esperienza consolidata. Metodi didattici moderni per la tua sicurezza stradale.
                     </p>
                 </div>
                 <div class="footer__section">
@@ -449,9 +427,24 @@
                 <div class="footer__section">
                     <h4 class="footer__subtitle">Contatti</h4>
                     <ul class="footer__links">
-                        <li>📍 Via Roma, 123 - Città</li>
-                        <li>📞 +39 0123 456789</li>
-                        <li>✉️ info@autoscuolacarbonin.com</li>
+                        <li class="footer__contact-item">
+                            <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                            </svg>
+                            Viale Trento e Trieste, 10D - 31100 Treviso (TV)
+                        </li>
+                        <li class="footer__contact-item">
+                            <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="currentColor"/>
+                            </svg>
+                            Tel: 0422 590972 • Cell: 339 118 9195
+                        </li>
+                        <li class="footer__contact-item">
+                            <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+                            </svg>
+                            info@autoscuolacarbonin.com
+                        </li>
                     </ul>
                 </div>
             </div>

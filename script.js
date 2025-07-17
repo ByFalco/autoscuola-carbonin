@@ -23,7 +23,6 @@ const navClose = $('#nav-close');
 const navOverlay = $('#nav-overlay');
 const navLinks = $$('.nav__link');
 const backToTopBtn = $('#back-to-top');
-const contactForm = $('.contact__form');
 const sections = $$('section[id]');
 
 // ===== MOBILE NAVIGATION =====
@@ -235,182 +234,6 @@ class BackToTopButton {
     }
 }
 
-// ===== FORM HANDLING =====
-class FormHandler {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        contactForm?.addEventListener('submit', (e) => this.handleSubmit(e));
-        
-        // Add real-time validation
-        const inputs = contactForm?.querySelectorAll('.form__input');
-        inputs?.forEach(input => {
-            input.addEventListener('blur', () => this.validateField(input));
-            input.addEventListener('input', () => this.clearFieldError(input));
-        });
-    }
-
-    async handleSubmit(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData.entries());
-        
-        // Validate form
-        if (!this.validateForm()) {
-            return;
-        }
-        
-        // Show loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Invio in corso...';
-        submitBtn.disabled = true;
-        
-        try {
-            // Simulate form submission (replace with actual endpoint)
-            await this.simulateFormSubmission(data);
-            
-            // Show success message
-            this.showMessage('Messaggio inviato con successo! Ti contatteremo presto.', 'success');
-            contactForm.reset();
-            
-        } catch (error) {
-            // Show error message
-            this.showMessage('Errore nell\'invio del messaggio. Riprova più tardi.', 'error');
-        } finally {
-            // Restore button state
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }
-    }
-
-    validateForm() {
-        const inputs = contactForm.querySelectorAll('.form__input[required]');
-        let isValid = true;
-        
-        inputs.forEach(input => {
-            if (!this.validateField(input)) {
-                isValid = false;
-            }
-        });
-        
-        return isValid;
-    }
-
-    validateField(field) {
-        const value = field.value.trim();
-        const type = field.type;
-        let isValid = true;
-        let errorMessage = '';
-        
-        // Required field validation
-        if (field.hasAttribute('required') && !value) {
-            isValid = false;
-            errorMessage = 'Questo campo è obbligatorio';
-        }
-        
-        // Email validation
-        if (type === 'email' && value && !this.isValidEmail(value)) {
-            isValid = false;
-            errorMessage = 'Inserisci un indirizzo email valido';
-        }
-        
-        // Phone validation
-        if (type === 'tel' && value && !this.isValidPhone(value)) {
-            isValid = false;
-            errorMessage = 'Inserisci un numero di telefono valido';
-        }
-        
-        this.showFieldError(field, errorMessage);
-        return isValid;
-    }
-
-    isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    isValidPhone(phone) {
-        const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,}$/;
-        return phoneRegex.test(phone);
-    }
-
-    showFieldError(field, message) {
-        this.clearFieldError(field);
-        
-        if (message) {
-            field.style.borderColor = '#ef4444';
-            
-            const errorElement = document.createElement('div');
-            errorElement.className = 'field-error';
-            errorElement.textContent = message;
-            errorElement.style.cssText = `
-                color: #ef4444;
-                font-size: 0.875rem;
-                margin-top: 0.25rem;
-                display: block;
-            `;
-            
-            field.parentNode.appendChild(errorElement);
-        }
-    }
-
-    clearFieldError(field) {
-        field.style.borderColor = '';
-        const errorElement = field.parentNode.querySelector('.field-error');
-        if (errorElement) {
-            errorElement.remove();
-        }
-    }
-
-    showMessage(message, type) {
-        // Remove existing messages
-        const existingMessage = $('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-        
-        const messageElement = document.createElement('div');
-        messageElement.className = 'form-message';
-        messageElement.textContent = message;
-        messageElement.style.cssText = `
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-weight: 500;
-            ${type === 'success' 
-                ? 'background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0;' 
-                : 'background-color: #fef2f2; color: #dc2626; border: 1px solid #fecaca;'
-            }
-        `;
-        
-        contactForm.insertBefore(messageElement, contactForm.firstChild);
-        
-        // Auto-remove after 5 seconds
-        setTimeout(() => {
-            messageElement.remove();
-        }, 5000);
-    }
-
-    async simulateFormSubmission(data) {
-        // Simulate API call delay
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Simulate 90% success rate
-                if (Math.random() > 0.1) {
-                    console.log('Form submitted:', data);
-                    resolve();
-                } else {
-                    reject(new Error('Simulated error'));
-                }
-            }, 1500);
-        });
-    }
-}
-
 // ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
 class ScrollAnimations {
     constructor() {
@@ -438,7 +261,7 @@ class ScrollAnimations {
         }, observerOptions);
 
         // Observe elements for animation
-        const animatedElements = $$('.service__card, .license__card, .news__card, .feature');
+        const animatedElements = $$('.service__card, .license__card, .feature');
         animatedElements.forEach((el, index) => {
             // Set initial state
             el.style.opacity = '0';
@@ -620,6 +443,29 @@ class AccessibilityEnhancements {
     }
 }
 
+// ===== CONTACT ACTION HANDLER =====
+function handleContactAction(event) {
+    // Detect if device is mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                     window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // On mobile: allow the tel: link to work (call the number)
+        return true;
+    } else {
+        // On desktop: prevent default and scroll to contact section
+        event.preventDefault();
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            contactSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        return false;
+    }
+}
+
 // ===== INITIALIZATION =====
 class App {
     constructor() {
@@ -643,7 +489,6 @@ class App {
             new SmoothScrolling();
             new ActiveSectionHighlighter();
             new BackToTopButton();
-            new FormHandler();
             new ScrollAnimations();
             new PerformanceOptimizer();
             new AccessibilityEnhancements();
