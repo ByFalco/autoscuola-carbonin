@@ -49,6 +49,7 @@ body {
     --font-size-3xl: 1.875rem;
     --font-size-4xl: 2.25rem;
     --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
     
     /* Spacing */
     --spacing-xs: 0.5rem;
@@ -966,7 +967,7 @@ body {
     }
     
     .home__title {
-        font-size: var(--font-size-4xl);
+        font-size: var(--font-size-5xl);
     }
     
     .footer__content {
@@ -989,13 +990,14 @@ body {
     }
     
     .home__title {
-        font-size: 2.5rem;
+        font-size: var(--font-size-5xl);
         margin-bottom: 1rem;
     }
     
     .home__description {
         font-size: 1rem;
         margin-bottom: 2rem;
+        max-width: 500px;
     }
     
     .home__badge-stats {
@@ -1038,6 +1040,20 @@ body {
     
     .nav__logo {
         height: 45px;
+    }
+
+    /* Correzione layout pulsanti homepage per 1024px */
+    .home__buttons {
+        flex-direction: row;
+        gap: var(--spacing-md);
+        width: auto;
+    }
+
+    .btn {
+        width: auto;
+        flex: 0 0 auto;
+        min-width: 160px;
+        max-width: 200px;
     }
 
     .nav__menu {
@@ -1226,7 +1242,7 @@ body {
     }
     
     .home__title {
-        font-size: 2.25rem;
+        font-size: var(--font-size-5xl);
         line-height: 1.2;
     }
     
@@ -1256,7 +1272,7 @@ body {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 610px) {
     .header {
         height: 60px;
         padding: 0 0.5rem;
@@ -1307,6 +1323,9 @@ body {
     }
 
     .home {
+        background-image: 
+            linear-gradient(to right, rgba(255, 0, 0, 0.03), rgba(0, 0, 0, 0.01)),
+            url('imgs/bg-mobile.jpg');
         background-attachment: scroll;
         padding: 7rem 0 2.5rem;
         min-height: calc(100vh - 60px);
@@ -1323,18 +1342,20 @@ body {
     }
 
     .home__badge-stats {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
     }
     
     .home__badge {
         font-size: 0.75rem;
         padding: 0.4rem 0.8rem;
+        flex-shrink: 0;
     }
 
     .home__title {
-        font-size: 2rem;
+        font-size: var(--font-size-3xl);
         margin-bottom: 0.75rem;
     }
 
@@ -1347,9 +1368,9 @@ body {
     .home__stats {
         gap: 1rem;
         justify-content: flex-start;
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
     }
     
     .stat__number {
@@ -1363,20 +1384,22 @@ body {
     }
     
     .stat__label {
-        font-size: 0.7rem;
+        display: none;
     }
 
     .home__buttons {
-        flex-direction: column;
-        gap: 0.75rem;
+        flex-direction: row;
+        gap: 0.5rem;
+        flex-wrap: wrap;
     }
 
     .btn {
-        width: 100%;
-        max-width: 280px;
-        padding: 0.75rem 1.25rem;
-        font-size: 0.85rem;
-        min-height: 42px;
+        flex: 1;
+        min-width: 120px;
+        max-width: 160px;
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        min-height: 38px;
     }
     
     .section__title {
@@ -1399,7 +1422,7 @@ body {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 610px) {
     .container {
         padding: 0 var(--spacing-sm);
     }
@@ -1409,7 +1432,7 @@ body {
     }
     
     .home__title {
-        font-size: var(--font-size-2xl);
+        font-size: var(--font-size-3xl);
     }
     
     .section__title {
