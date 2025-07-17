@@ -48,7 +48,11 @@
             <div class="nav__actions">
                 <a href="#contatti" class="nav__cta-btn">
                     <svg class="nav__cta-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27099 2.11999 4.18C2.095 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.59531 1.99522 8.06579 2.16708 8.43376 2.48353C8.80173 2.79999 9.04207 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.8939 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4135 11.5865 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="m7.18 10.27 6.504 6.46c.697-.807 5.11-5.538 7.316.924 0 0-.232 3.346-4.994 3.346-3.367 0-6.851-4.038-9.29-6.346C4.626 12.692 3 10.154 3 7.846 3 3.116 6.252 3 6.252 3c7.432 2.538.929 7.27.929 7.27Z" fill="#ffffff"></path>
+                        </g>
                     </svg>
                     <span>Contattaci</span>
                 </a>
@@ -65,6 +69,13 @@
 
     <!-- Main Content -->
     <main class="main">
+        <!-- SVG Icons Library -->
+        <svg style="display: none;" aria-hidden="true">
+            <symbol id="checkmark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+        </svg>
+        
         <!-- Home Section -->
         <section class="home section" id="home">
             <div class="home__overlay"></div>
@@ -98,8 +109,8 @@
                     </div>
                     <h1 class="home__title">La tua<span class="highlight"> patente </span>inizia qui</h1>
                     <p class="home__description">
-                        Con noi potrai conseguire patenti di ogni categoria, conversioni UE/extra-UE e patenti internazionali.
-                        Potrai recuperare punti, rinnovare o richiedere il duplicato della patente e svolgere visite mediche in sede.
+                        Con noi potrai conseguire <span class="highlight-description">patenti di ogni categoria</span>, <span class="highlight-description">conversioni UE/extra-UE</span> e patenti internazionali.
+                        Potrai <span class="highlight-description">recuperare punti</span>, rinnovare o richiedere duplicato della patente e gestire passaggi di proprietà e bolli.
                     </p>
                     <div class="home__buttons">
                         <a href="#contatti" class="btn btn--primary">
@@ -117,47 +128,80 @@
         <!-- Autoscuola Section -->
         <section class="about section" id="autoscuola">
             <div class="container">
-                <div class="section__header">
-                    <h2 class="section__title">Chi Siamo</h2>
-                    <p class="section__subtitle">La nostra storia e i nostri valori</p>
-                </div>
                 <div class="about__container">
                     <div class="about__content">
+                        <div class="about__badge">Insieme dal 1902</div>
                         <h3 class="about__title">Autoscuola Carbonin</h3>
                         <p class="about__description">
-                            Con oltre tre decenni di esperienza nel settore della formazione alla guida, 
-                            Autoscuola Carbonin rappresenta un punto di riferimento per chi desidera conseguire 
+                            Con oltre <span class="highlight-description">tre decenni di esperienza</span> nel settore della formazione alla guida, 
+                            Autoscuola Carbonin rappresenta un <span class="highlight-description">punto di riferimento</span> per chi desidera conseguire 
                             la patente in modo sicuro e professionale.
                         </p>
                         <div class="about__features">
                             <div class="feature">
-                                <div class="feature__icon">✓</div>
+                                <div class="feature__icon">
+                                    <svg width="16" height="16">
+                                        <use href="#checkmark"></use>
+                                    </svg>
+                                </div>
                                 <div class="feature__content">
-                                    <h4>Istruttori Qualificati</h4>
-                                    <p>Team di professionisti esperti e certificati</p>
+                                    <h4>Patenti A</h4>
                                 </div>
                             </div>
                             <div class="feature">
-                                <div class="feature__icon">✓</div>
+                                <div class="feature__icon">
+                                    <svg width="16" height="16">
+                                        <use href="#checkmark"></use>
+                                    </svg>
+                                </div>
                                 <div class="feature__content">
-                                    <h4>Metodi Innovativi</h4>
-                                    <p>Tecniche di insegnamento moderne e efficaci</p>
+                                    <h4>Patenti B</h4>
                                 </div>
                             </div>
                             <div class="feature">
-                                <div class="feature__icon">✓</div>
+                                <div class="feature__icon">
+                                    <svg width="16" height="16">
+                                        <use href="#checkmark"></use>
+                                    </svg>
+                                </div>
                                 <div class="feature__content">
-                                    <h4>Supporto Completo</h4>
-                                    <p>Assistenza durante tutto il percorso formativo</p>
+                                    <h4>Patenti Superiori</h4>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature__icon">
+                                    <svg width="16" height="16">
+                                        <use href="#checkmark"></use>
+                                    </svg>
+                                </div>
+                                <div class="feature__content">
+                                    <h4>Corsi CQC</h4>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature__icon">
+                                    <svg width="16" height="16">
+                                        <use href="#checkmark"></use>
+                                    </svg>
+                                </div>
+                                <div class="feature__content">
+                                    <h4>Recupero Punti</h4>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="feature__icon">
+                                    <svg width="16" height="16">
+                                        <use href="#checkmark"></use>
+                                    </svg>
+                                </div>
+                                <div class="feature__content">
+                                    <h4>Pratiche Auto</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="about__image">
-                        <div class="about__img-placeholder">
-                            <span class="placeholder-icon">🏫</span>
-                            <p>Immagine Autoscuola</p>
-                        </div>
+                        <img src="imgs/autoscuola.jpg" alt="Autoscuola Carbonin - La nostra sede" class="about__img">
                     </div>
                 </div>
             </div>
@@ -166,43 +210,59 @@
         <!-- Servizi Section -->
         <section class="services section" id="servizi">
             <div class="container">
-                <div class="section__header">
-                    <h2 class="section__title">I Nostri Servizi</h2>
-                    <p class="section__subtitle">Tutto quello che ti serve per conseguire la patente</p>
-                </div>
                 <div class="services__container">
-                    <div class="service__card">
-                        <div class="service__icon">📚</div>
-                        <h3 class="service__title">Teoria</h3>
+                    <a href="servizi/rinnovo-duplicato.html" class="service__card">
+                        <h3 class="service__title">Rinnovo e Duplicato</h3>
                         <p class="service__description">
-                            Corsi teorici completi con materiale didattico aggiornato 
-                            e simulazioni d'esame.
+                            Servizio completo per il <span class="highlight-description">rinnovo delle patenti</span> 
+                            di ogni categoria, duplicati in caso di smarrimento o furto.
                         </p>
-                    </div>
-                    <div class="service__card">
-                        <div class="service__icon">🚗</div>
-                        <h3 class="service__title">Pratica</h3>
+                        <button class="service-btn">
+                            <span class="service-btn__circle" aria-hidden="true">
+                                <span class="service-btn__icon service-btn__arrow"></span>
+                            </span>
+                            <span class="service-btn__text">Scopri di più</span>
+                        </button>
+                    </a>
+                    <a href="servizi/recupero-punti.html" class="service__card">
+                        <h3 class="service__title">Recupero Punti</h3>
                         <p class="service__description">
-                            Lezioni di guida personalizzate con istruttori qualificati 
-                            e veicoli moderni.
+                            Corsi per il <span class="highlight-description">recupero punti patente</span> 
+                            con programmi personalizzati e supporto completo.
                         </p>
-                    </div>
-                    <div class="service__card">
-                        <div class="service__icon">📋</div>
-                        <h3 class="service__title">Pratiche</h3>
+                        <button class="service-btn">
+                            <span class="service-btn__circle" aria-hidden="true">
+                                <span class="service-btn__icon service-btn__arrow"></span>
+                            </span>
+                            <span class="service-btn__text">Scopri di più</span>
+                        </button>
+                    </a>
+                    <a href="servizi/conversioni-patenti.html" class="service__card">
+                        <h3 class="service__title">Conversioni Patenti</h3>
                         <p class="service__description">
-                            Gestione completa di tutte le pratiche burocratiche 
-                            per il conseguimento della patente.
+                            <span class="highlight-description">Conversione patenti europee ed extraeuropee</span> 
+                            con assistenza burocratica specializzata.
                         </p>
-                    </div>
-                    <div class="service__card">
-                        <div class="service__icon">🔄</div>
-                        <h3 class="service__title">Rinnovi</h3>
+                        <button class="service-btn">
+                            <span class="service-btn__circle" aria-hidden="true">
+                                <span class="service-btn__icon service-btn__arrow"></span>
+                            </span>
+                            <span class="service-btn__text">Scopri di più</span>
+                        </button>
+                    </a>
+                    <a href="servizi/altri-servizi.html" class="service__card">
+                        <h3 class="service__title">Altri Servizi</h3>
                         <p class="service__description">
-                            Servizio di rinnovo patenti e conversioni 
-                            con procedure semplificate.
+                            Servizi aggiuntivi per <span class="highlight-description">pratiche automobilistiche</span>, 
+                            esperimento guida, Carta Tachigrafica e molto altro.
                         </p>
-                    </div>
+                        <button class="service-btn">
+                            <span class="service-btn__circle" aria-hidden="true">
+                                <span class="service-btn__icon service-btn__arrow"></span>
+                            </span>
+                            <span class="service-btn__text">Scopri di più</span>
+                        </button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -403,7 +463,13 @@
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="back-to-top" aria-label="Torna su">
-        ↑
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path d="M18.2929 15.2893C18.6834 14.8988 18.6834 14.2656 18.2929 13.8751L13.4007 8.98766C12.6195 8.20726 11.3537 8.20757 10.5729 8.98835L5.68257 13.8787C5.29205 14.2692 5.29205 14.9024 5.68257 15.2929C6.0731 15.6835 6.70626 15.6835 7.09679 15.2929L11.2824 11.1073C11.673 10.7168 12.3061 10.7168 12.6966 11.1073L16.8787 15.2893C17.2692 15.6798 17.9024 15.6798 18.2929 15.2893Z" fill="#ffffff"></path>
+            </g>
+        </svg>
     </button>
 
     <script src="script.js"></script>
