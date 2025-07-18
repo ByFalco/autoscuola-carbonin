@@ -1185,8 +1185,8 @@ body {
     }
     
     .license-title-image {
-        width: 80px;
-        height: 80px;
+        width: 120px;
+        height: 120px;
         margin-top: 0;
         align-self: center;
     }
@@ -1212,8 +1212,8 @@ body {
 
 @media (max-width: 480px) {
     .license-title-image {
-        width: 60px;
-        height: 60px;
+        width: 100px;
+        height: 100px;
     }
     
     .license-title-content h2 {
