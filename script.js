@@ -42,7 +42,14 @@ class MobileNavigation {
         
         // Close menu when clicking on links
         navLinks.forEach(link => {
-            link.addEventListener('click', () => this.hideMenu());
+          link.addEventListener('click', (e) => {
+            // If it's a dropdown toggle on mobile, let the dropdown handler take care of it
+            if (link.parentElement.classList.contains('nav__item--dropdown') && window.innerWidth <= 1024) {
+              return;
+            }
+            // Otherwise, hide the menu
+            this.hideMenu();
+          });
         });
         
         // Close menu when clicking outside
@@ -57,6 +64,22 @@ class MobileNavigation {
             if (e.key === 'Escape' && this.isMenuOpen) {
                 this.hideMenu();
             }
+        });
+
+        this.handleDropdowns();
+    }
+
+    handleDropdowns() {
+        const dropdownItems = $$('.nav__item--dropdown');
+
+        dropdownItems.forEach(item => {
+            const link = item.querySelector('.nav__link');
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 1024) {
+                    e.preventDefault();
+                    item.classList.toggle('is-active');
+                }
+            });
         });
     }
 
