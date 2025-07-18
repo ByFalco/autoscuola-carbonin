@@ -2478,7 +2478,7 @@ body {
     .arrow-annotation__svg {
         width: 40px;
         height: 25px;
-        transform: rotate(45deg);
+        transform: rotate(45deg) !important;
     }
     
     .home__badge {
