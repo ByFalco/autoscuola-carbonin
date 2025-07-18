@@ -199,7 +199,7 @@ class CookieBanner {
         if (placeholder && container) {
             // Crea l'iframe di Google Maps
             const iframe = document.createElement('iframe');
-            iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11180.5!2d12.2436!3d45.6669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477935b1234567890%3A0x1234567890abcdef!2sViale%20Trento%20e%20Trieste%2C%2010D%2C%2031100%20Treviso%20TV%2C%20Italy!5e0!3m2!1sen!2sit!4v1234567890123!5m2!1sen!2sit";
+            iframe.src = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5577.031166718418!2d12.240851000000001!3d45.660549!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477949d44561fc03%3A0x9d2212d780084cef!2sAutoscuola%20Carbonin%20Treviso!5e0!3m2!1sen!2sit!4v1752875507732!5m2!1sen!2sit";
             iframe.width = "100%";
             iframe.height = "400";
             iframe.style.border = "0";
