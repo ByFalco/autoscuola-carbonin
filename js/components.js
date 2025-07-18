@@ -3,18 +3,51 @@ async function loadComponent(elementId, componentPath) {
     try {
         const response = await fetch(componentPath);
         const html = await response.text();
-        document.getElementById(elementId).innerHTML = html;
+        
+        // Adatta i percorsi nel contenuto HTML in base alla posizione della pagina corrente
+        const adaptedHtml = adaptPathsForCurrentPage(html);
+        
+        document.getElementById(elementId).innerHTML = adaptedHtml;
     } catch (error) {
         console.error(`Errore nel caricamento del componente ${componentPath}:`, error);
     }
 }
 
+// Funzione per adattare i percorsi in base alla posizione della pagina corrente
+function adaptPathsForCurrentPage(html) {
+    const currentPath = window.location.pathname;
+    
+    // Se siamo nella root del progetto (es. privacy-cookies.html)
+    if (currentPath === '/privacy-cookies.html' || currentPath.endsWith('/privacy-cookies.html') || 
+        (!currentPath.includes('/patenti/') && !currentPath.includes('/servizi/') && currentPath !== '/' && currentPath !== '/index.html')) {
+        // Sostituisce "../" con "./" per i percorsi nella root
+        return html.replace(/\.\.\//g, './');
+    }
+    
+    // Per le sottocartelle, mantiene i percorsi originali con "../"
+    return html;
+}
+
+// Funzione per determinare il percorso corretto per i componenti
+function getComponentPath(componentName) {
+    const currentPath = window.location.pathname;
+    
+    // Se siamo nella root del progetto
+    if (currentPath === '/privacy-cookies.html' || currentPath.endsWith('/privacy-cookies.html') || 
+        (!currentPath.includes('/patenti/') && !currentPath.includes('/servizi/') && currentPath !== '/' && currentPath !== '/index.html')) {
+        return `./components/${componentName}`;
+    }
+    
+    // Per le sottocartelle
+    return `../components/${componentName}`;
+}
+
 // Funzione per inizializzare i componenti
 async function initializeComponents() {
-    // Carica navbar e footer
+    // Carica navbar e footer con percorsi adattivi
     await Promise.all([
-        loadComponent('navbar-placeholder', '../components/navbar.html'),
-        loadComponent('footer-placeholder', '../components/footer.html')
+        loadComponent('navbar-placeholder', getComponentPath('navbar.html')),
+        loadComponent('footer-placeholder', getComponentPath('footer.html'))
     ]);
     
     // Aspetta che il DOM sia completamente aggiornato prima di inizializzare gli script
@@ -133,7 +166,18 @@ function handleContactAction(event) {
     } else {
         // On desktop: prevent default and navigate to contact section on main page
         event.preventDefault();
-        window.location.href = '../index.html#contact';
+        
+        const currentPath = window.location.pathname;
+        
+        // Se siamo nella root del progetto
+        if (currentPath === '/privacy-cookies.html' || currentPath.endsWith('/privacy-cookies.html') || 
+            (!currentPath.includes('/patenti/') && !currentPath.includes('/servizi/') && currentPath !== '/' && currentPath !== '/index.html')) {
+            window.location.href = './index.html#contact';
+        } else {
+            // Per le sottocartelle
+            window.location.href = '../index.html#contact';
+        }
+        
         return false;
     }
 }
