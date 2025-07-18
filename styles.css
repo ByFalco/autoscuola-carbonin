@@ -3090,7 +3090,7 @@ body {
 }
 
 .privacy-content {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0;
 }
@@ -3120,7 +3120,6 @@ body {
     padding: 2rem;
     background: var(--color-white);
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .privacy-title {
@@ -3147,7 +3146,6 @@ body {
     background: var(--color-white);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
