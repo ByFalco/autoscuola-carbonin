@@ -2354,7 +2354,6 @@ body {
     .arrow-annotation__svg {
         width: 45px;
         height: 30px;
-        transform: rotate(60deg);
     }
     
     .home__stats {
@@ -2464,7 +2463,7 @@ body {
     /* Stili responsive per freccia annotation su mobile piccolo */
     .home__arrow-annotation {
         justify-content: flex-start;
-        margin-left: 0.2rem;
+        margin-left: 0.3rem;
         margin-bottom: 0.5rem;
         gap: 0.5rem;
     }
