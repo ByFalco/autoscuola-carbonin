@@ -3,77 +3,18 @@ async function loadComponent(elementId, componentPath) {
     try {
         const response = await fetch(componentPath);
         const html = await response.text();
-        
-        // Adatta i percorsi nel contenuto HTML in base alla posizione della pagina corrente
-        const adaptedHtml = adaptPathsForCurrentPage(html);
-        
-        document.getElementById(elementId).innerHTML = adaptedHtml;
+        document.getElementById(elementId).innerHTML = html;
     } catch (error) {
         console.error(`Errore nel caricamento del componente ${componentPath}:`, error);
     }
 }
 
-// Funzione per adattare i percorsi in base alla posizione della pagina corrente
-function adaptPathsForCurrentPage(html) {
-    const currentPath = window.location.pathname;
-    console.log('=== PATH ADAPTATION DEBUG ===');
-    console.log('Current path:', currentPath);
-    console.log('Current hostname:', window.location.hostname);
-    console.log('Current href:', window.location.href);
-    
-    // Controlla se siamo nella pagina privacy-cookies
-    const isPrivacyCookiesPage = currentPath.includes('privacy-cookies.html');
-    console.log('Is privacy-cookies page:', isPrivacyCookiesPage);
-    
-    // Controlla se siamo in una sottocartella
-    const isInSubfolder = currentPath.includes('/patenti/') || currentPath.includes('/servizi/');
-    console.log('Is in subfolder:', isInSubfolder);
-    
-    // Se siamo nella pagina privacy-cookies (che è nella root), adatta i percorsi
-    if (isPrivacyCookiesPage && !isInSubfolder) {
-        console.log('Adapting paths: replacing ../ with ./');
-        console.log('Original HTML length:', html.length);
-        
-        // Sostituisce tutti i percorsi "../" con "./"
-        const adaptedHtml = html.replace(/\.\.\//g, './');
-        
-        console.log('Adapted HTML length:', adaptedHtml.length);
-        console.log('Number of ../ replaced:', (html.match(/\.\.\//g) || []).length);
-        console.log('=== END PATH ADAPTATION DEBUG ===');
-        
-        return adaptedHtml;
-    }
-    
-    // Per le sottocartelle o altre pagine, mantiene i percorsi originali
-    console.log('Keeping original ../ paths');
-    console.log('=== END PATH ADAPTATION DEBUG ===');
-    return html;
-}
-
-// Funzione per determinare il percorso corretto per i componenti
-function getComponentPath(componentName) {
-    const currentPath = window.location.pathname;
-    
-    // Controlla se siamo nella pagina privacy-cookies (nella root)
-    const isPrivacyCookiesPage = currentPath.includes('privacy-cookies.html');
-    const isInSubfolder = currentPath.includes('/patenti/') || currentPath.includes('/servizi/');
-    
-    if (isPrivacyCookiesPage && !isInSubfolder) {
-        console.log(`Component path for ${componentName}: ./components/${componentName}`);
-        return `./components/${componentName}`;
-    }
-    
-    // Per le sottocartelle
-    console.log(`Component path for ${componentName}: ../components/${componentName}`);
-    return `../components/${componentName}`;
-}
-
 // Funzione per inizializzare i componenti
 async function initializeComponents() {
-    // Carica navbar e footer con percorsi adattivi
+    // Carica navbar e footer
     await Promise.all([
-        loadComponent('navbar-placeholder', getComponentPath('navbar.html')),
-        loadComponent('footer-placeholder', getComponentPath('footer.html'))
+        loadComponent('navbar-placeholder', '../components/navbar.html'),
+        loadComponent('footer-placeholder', '../components/footer.html')
     ]);
     
     // Aspetta che il DOM sia completamente aggiornato prima di inizializzare gli script
@@ -192,20 +133,7 @@ function handleContactAction(event) {
     } else {
         // On desktop: prevent default and navigate to contact section on main page
         event.preventDefault();
-        
-        const currentPath = window.location.pathname;
-        
-        // Controlla se siamo nella pagina privacy-cookies (nella root)
-        const isPrivacyCookiesPage = currentPath.includes('privacy-cookies.html');
-        const isInSubfolder = currentPath.includes('/patenti/') || currentPath.includes('/servizi/');
-        
-        if (isPrivacyCookiesPage && !isInSubfolder) {
-            window.location.href = './index.html#contact';
-        } else {
-            // Per le sottocartelle
-            window.location.href = '../index.html#contact';
-        }
-        
+        window.location.href = '../index.html#contact';
         return false;
     }
 }

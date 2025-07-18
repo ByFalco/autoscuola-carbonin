@@ -111,11 +111,11 @@ class CookieBanner {
     showDetails() {
         // Determina il percorso corretto per la pagina privacy
         const currentPath = window.location.pathname;
-        let privacyPath = 'privacy-cookies.html';
+        let privacyPath = 'info/privacy-cookies.html';
         
         // Se siamo in una sottocartella, aggiungi '../' per tornare alla root
-        if (currentPath.includes('/patenti/') || currentPath.includes('/servizi/')) {
-            privacyPath = '../privacy-cookies.html';
+        if (currentPath.includes('/patenti/') || currentPath.includes('/servizi/') || currentPath.includes('/info/')) {
+            privacyPath = '../info/privacy-cookies.html';
         }
         
         // Apre la pagina privacy in una nuova scheda

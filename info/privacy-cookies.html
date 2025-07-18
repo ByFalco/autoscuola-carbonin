@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Informativa Privacy e Cookies - Autoscuola Carbonin">
     <title>Privacy e Cookies - Autoscuola Carbonin</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="fonts/inter.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../fonts/inter.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header" id="header">
         <nav class="nav container">
             <div class="nav__brand">
-                <a href="index.html" class="nav__logo-link">
-                    <img src="imgs/logo.png" alt="Autoscuola Carbonin" class="nav__logo">
+                <a href="../index.html" class="nav__logo-link">
+                    <img src="../imgs/logo.png" alt="Autoscuola Carbonin" class="nav__logo">
                 </a>
             </div>
             <div class="nav__actions">
-                <a href="index.html" class="btn btn--primary btn--nav">Torna al Sito</a>
+                <a href="../index.html" class="btn btn--primary btn--nav">Torna al Sito</a>
             </div>
         </nav>
     </header>
@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="privacy-content">
                     <nav class="breadcrumb">
-                        <a href="index.html">Home</a>
+                        <a href="../index.html">Home</a>
                         <span>/</span>
                         <span>Privacy e Cookies</span>
                     </nav>
@@ -124,12 +124,12 @@
     <!-- Footer -->
     <div id="footer-placeholder"></div>
 
-    <script src="js/cookies.js"></script>
+    <script src="../js/cookies.js"></script>
     <script>
-        // Carica il footer dinamico per la pagina privacy (che è nella root)
+        // Carica il footer dinamico per la pagina privacy (che è nella cartella info)
         async function loadFooter() {
             try {
-                const response = await fetch('components/footer.html');
+                const response = await fetch('../components/footer.html');
                 const html = await response.text();
                 document.getElementById('footer-placeholder').innerHTML = html;
             } catch (error) {
@@ -145,7 +145,7 @@
             } else {
                 // Fallback se cookieBanner non è disponibile
                 document.cookie = 'autoscuola_cookie_consent=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
-                window.location.href = 'index.html';
+                window.location.href = '../index.html';
             }
         }
 
