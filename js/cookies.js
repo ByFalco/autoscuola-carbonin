@@ -128,6 +128,70 @@ class CookieBanner {
         this.loadMaps();
     }
 
+    // Nuova funzione per gestire la richiesta di caricamento mappa
+    requestMapLoad() {
+        // Controlla se i cookies sono stati accettati
+        const consentValue = this.getCookie(this.cookieName);
+        
+        if (consentValue === 'accepted') {
+            // Se i cookies sono accettati, carica la mappa
+            this.loadMaps();
+        } else {
+            // Se i cookies non sono accettati, mostra il banner
+            if (!this.hasConsent()) {
+                // Se non c'è ancora una decisione, crea e mostra il banner
+                this.createBanner();
+                this.showBanner();
+            } else if (consentValue === 'declined') {
+                // Se i cookies sono stati rifiutati, mostra un messaggio informativo
+                this.showMapConsentMessage();
+            }
+        }
+    }
+
+    // Funzione per mostrare un messaggio quando i cookies sono stati rifiutati
+    showMapConsentMessage() {
+        const placeholder = document.getElementById('maps-placeholder');
+        if (placeholder) {
+            // Crea un messaggio temporaneo
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'maps-consent-message';
+            messageDiv.innerHTML = `
+                <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 6px; margin: 2px 0; text-align: center;">
+                    <p style="margin: 0 0 6px 0; font-size: 12px; color: #6c757d;">
+                        Google Maps utilizza cookies<br>per fornire il servizio di mappe.
+                    </p>
+                    <button onclick="cookieBanner.showConsentOptions()" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                        Gestisci Consenso
+                    </button>
+                </div>
+            `;
+            
+            // Inserisce il messaggio dopo il contenuto del placeholder
+            const content = placeholder.querySelector('.maps-placeholder__content');
+            if (content) {
+                content.appendChild(messageDiv);
+                
+                // Rimuove il messaggio dopo 5 secondi
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 5000);
+            }
+        }
+    }
+
+    // Funzione per mostrare nuovamente le opzioni di consenso
+    showConsentOptions() {
+        // Rimuove il cookie esistente per permettere una nuova scelta
+        document.cookie = `${this.cookieName}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/`;
+        
+        // Mostra il banner per una nuova decisione
+        this.createBanner();
+        this.showBanner();
+    }
+
     loadMaps() {
         const placeholder = document.getElementById('maps-placeholder');
         const container = document.getElementById('google-maps-container');
