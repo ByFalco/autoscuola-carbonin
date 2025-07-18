@@ -1,0 +1,110 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/patenti/patenti-a",
+      "destination": "/patenti/patenti-a.html"
+    },
+    {
+      "source": "/patenti/patenti-b",
+      "destination": "/patenti/patenti-b.html"
+    },
+    {
+      "source": "/patenti/patenti-superiori",
+      "destination": "/patenti/patenti-superiori.html"
+    },
+    {
+      "source": "/servizi/altri-servizi",
+      "destination": "/servizi/altri-servizi.html"
+    },
+    {
+      "source": "/servizi/conversioni-patenti",
+      "destination": "/servizi/conversioni-patenti.html"
+    },
+    {
+      "source": "/servizi/recupero-punti",
+      "destination": "/servizi/recupero-punti.html"
+    },
+    {
+      "source": "/servizi/rinnovo-duplicato",
+      "destination": "/servizi/rinnovo-duplicato.html"
+    },
+    {
+      "source": "/info/privacy-cookies",
+      "destination": "/info/privacy-cookies.html"
+    },
+    {
+      "source": "/test-cookies",
+      "destination": "/test-cookies.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/patenti/patenti-a.html",
+      "destination": "/patenti/patenti-a",
+      "permanent": true
+    },
+    {
+      "source": "/patenti/patenti-b.html",
+      "destination": "/patenti/patenti-b",
+      "permanent": true
+    },
+    {
+      "source": "/patenti/patenti-superiori.html",
+      "destination": "/patenti/patenti-superiori",
+      "permanent": true
+    },
+    {
+      "source": "/servizi/altri-servizi.html",
+      "destination": "/servizi/altri-servizi",
+      "permanent": true
+    },
+    {
+      "source": "/servizi/conversioni-patenti.html",
+      "destination": "/servizi/conversioni-patenti",
+      "permanent": true
+    },
+    {
+      "source": "/servizi/recupero-punti.html",
+      "destination": "/servizi/recupero-punti",
+      "permanent": true
+    },
+    {
+      "source": "/servizi/rinnovo-duplicato.html",
+      "destination": "/servizi/rinnovo-duplicato",
+      "permanent": true
+    },
+    {
+      "source": "/info/privacy-cookies.html",
+      "destination": "/info/privacy-cookies",
+      "permanent": true
+    },
+    {
+      "source": "/test-cookies.html",
+      "destination": "/test-cookies",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
+}
