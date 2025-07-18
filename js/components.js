@@ -16,15 +16,37 @@ async function loadComponent(elementId, componentPath) {
 // Funzione per adattare i percorsi in base alla posizione della pagina corrente
 function adaptPathsForCurrentPage(html) {
     const currentPath = window.location.pathname;
+    console.log('=== PATH ADAPTATION DEBUG ===');
+    console.log('Current path:', currentPath);
+    console.log('Current hostname:', window.location.hostname);
+    console.log('Current href:', window.location.href);
     
-    // Se siamo nella root del progetto (es. privacy-cookies.html)
-    if (currentPath === '/privacy-cookies.html' || currentPath.endsWith('/privacy-cookies.html') || 
-        (!currentPath.includes('/patenti/') && !currentPath.includes('/servizi/') && currentPath !== '/' && currentPath !== '/index.html')) {
-        // Sostituisce "../" con "./" per i percorsi nella root
-        return html.replace(/\.\.\//g, './');
+    // Controlla se siamo nella pagina privacy-cookies
+    const isPrivacyCookiesPage = currentPath.includes('privacy-cookies.html');
+    console.log('Is privacy-cookies page:', isPrivacyCookiesPage);
+    
+    // Controlla se siamo in una sottocartella
+    const isInSubfolder = currentPath.includes('/patenti/') || currentPath.includes('/servizi/');
+    console.log('Is in subfolder:', isInSubfolder);
+    
+    // Se siamo nella pagina privacy-cookies (che è nella root), adatta i percorsi
+    if (isPrivacyCookiesPage && !isInSubfolder) {
+        console.log('Adapting paths: replacing ../ with ./');
+        console.log('Original HTML length:', html.length);
+        
+        // Sostituisce tutti i percorsi "../" con "./"
+        const adaptedHtml = html.replace(/\.\.\//g, './');
+        
+        console.log('Adapted HTML length:', adaptedHtml.length);
+        console.log('Number of ../ replaced:', (html.match(/\.\.\//g) || []).length);
+        console.log('=== END PATH ADAPTATION DEBUG ===');
+        
+        return adaptedHtml;
     }
     
-    // Per le sottocartelle, mantiene i percorsi originali con "../"
+    // Per le sottocartelle o altre pagine, mantiene i percorsi originali
+    console.log('Keeping original ../ paths');
+    console.log('=== END PATH ADAPTATION DEBUG ===');
     return html;
 }
 
@@ -32,13 +54,17 @@ function adaptPathsForCurrentPage(html) {
 function getComponentPath(componentName) {
     const currentPath = window.location.pathname;
     
-    // Se siamo nella root del progetto
-    if (currentPath === '/privacy-cookies.html' || currentPath.endsWith('/privacy-cookies.html') || 
-        (!currentPath.includes('/patenti/') && !currentPath.includes('/servizi/') && currentPath !== '/' && currentPath !== '/index.html')) {
+    // Controlla se siamo nella pagina privacy-cookies (nella root)
+    const isPrivacyCookiesPage = currentPath.includes('privacy-cookies.html');
+    const isInSubfolder = currentPath.includes('/patenti/') || currentPath.includes('/servizi/');
+    
+    if (isPrivacyCookiesPage && !isInSubfolder) {
+        console.log(`Component path for ${componentName}: ./components/${componentName}`);
         return `./components/${componentName}`;
     }
     
     // Per le sottocartelle
+    console.log(`Component path for ${componentName}: ../components/${componentName}`);
     return `../components/${componentName}`;
 }
 
@@ -169,9 +195,11 @@ function handleContactAction(event) {
         
         const currentPath = window.location.pathname;
         
-        // Se siamo nella root del progetto
-        if (currentPath === '/privacy-cookies.html' || currentPath.endsWith('/privacy-cookies.html') || 
-            (!currentPath.includes('/patenti/') && !currentPath.includes('/servizi/') && currentPath !== '/' && currentPath !== '/index.html')) {
+        // Controlla se siamo nella pagina privacy-cookies (nella root)
+        const isPrivacyCookiesPage = currentPath.includes('privacy-cookies.html');
+        const isInSubfolder = currentPath.includes('/patenti/') || currentPath.includes('/servizi/');
+        
+        if (isPrivacyCookiesPage && !isInSubfolder) {
             window.location.href = './index.html#contact';
         } else {
             // Per le sottocartelle
