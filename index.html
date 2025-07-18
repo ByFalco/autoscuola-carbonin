@@ -6,9 +6,7 @@
     <meta name="description" content="Autoscuola Carbonin - La tua scuola guida di fiducia per conseguire la patente">
     <title>Autoscuola Carbonin - Scuola Guida</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/inter.css">
 </head>
 <body>
     <!-- Header -->
@@ -416,15 +414,31 @@
                         </div>
                     </div>
                     <div class="contact__map">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11180.5!2d12.2436!3d45.6669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477935b1234567890%3A0x1234567890abcdef!2sViale%20Trento%20e%20Trieste%2C%2010D%2C%2031100%20Treviso%20TV%2C%20Italy!5e0!3m2!1sen!2sit!4v1234567890123!5m2!1sen!2sit"
-                            width="100%" 
-                            height="400" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                        <!-- Placeholder per Google Maps -->
+                        <div id="maps-placeholder" class="maps-placeholder">
+                            <div class="maps-placeholder__content">
+                                <div class="maps-placeholder__icon">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h4>Mappa Interattiva</h4>
+                                <p>Per visualizzare la mappa di Google Maps, è necessario accettare i cookie di terze parti.</p>
+                                <button class="maps-placeholder__btn" onclick="cookieBanner.loadMaps()">
+                                    Carica Mappa
+                                </button>
+                                <p class="maps-placeholder__address">
+                                    <strong>Indirizzo:</strong><br>
+                                    Viale Trento e Trieste, 10D<br>
+                                    31100 Treviso (TV)
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Container per Google Maps (caricato dinamicamente) -->
+                        <div id="google-maps-container" style="display: none;">
+                            <!-- L'iframe verrà inserito qui dopo il consenso -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -493,6 +507,14 @@
             </div>
             <div class="footer__bottom">
                 <p>&copy; 2025 Autoscuola Carbonin. Tutti i diritti riservati.</p>
+                <div class="footer__privacy">
+                    <a href="privacy-cookies.html" class="footer__privacy-link" target="_blank">
+                        <svg class="footer__privacy-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 7C13.1 7 14 7.9 14 9S13.1 11 12 11 10 10.1 10 9 10.9 7 12 7ZM12 17C10.9 17 10 16.1 10 15S10.9 13 12 13 14 13.9 14 15 13.1 17 12 17Z" fill="currentColor"/>
+                        </svg>
+                        Privacy & Cookies
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
@@ -508,6 +530,7 @@
         </svg>
     </button>
 
+    <script src="js/cookies.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

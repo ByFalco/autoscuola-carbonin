@@ -1,0 +1,32 @@
+/* Inter Variable Font - Supporta tutti i pesi da 100 a 900 */
+
+/* Fallback per browser che non supportano font variabili */
+:root { 
+    font-family: "Inter", sans-serif; 
+}
+
+/* Font variabili per browser moderni */
+@supports (font-variation-settings: normal) { 
+    :root { 
+        font-family: "InterVariable", sans-serif; 
+        font-optical-sizing: auto; 
+    } 
+}
+
+/* Font variabile normale */
+@font-face { 
+    font-family: InterVariable; 
+    font-style: normal; 
+    font-weight: 100 900; 
+    font-display: swap; 
+    src: url("InterVariable.ttf") format("truetype"); 
+}
+
+/* Font variabile corsivo */
+@font-face { 
+    font-family: InterVariable; 
+    font-style: italic; 
+    font-weight: 100 900; 
+    font-display: swap; 
+    src: url("InterVariable-Italic.ttf") format("truetype"); 
+}

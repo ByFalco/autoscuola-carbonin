@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Informativa Privacy e Cookies - Autoscuola Carbonin">
+    <title>Privacy e Cookies - Autoscuola Carbonin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="fonts/inter.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <div class="nav__brand">
+                <a href="index.html" class="nav__logo-link">
+                    <img src="imgs/logo.png" alt="Autoscuola Carbonin" class="nav__logo">
+                </a>
+            </div>
+            <div class="nav__actions">
+                <a href="index.html" class="btn btn--primary btn--nav">Torna al Sito</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="privacy-page section">
+            <div class="container">
+                <div class="privacy-content">
+                    <nav class="breadcrumb">
+                        <a href="index.html">Home</a>
+                        <span>/</span>
+                        <span>Privacy e Cookies</span>
+                    </nav>
+                    
+                    <div class="privacy-header">
+                        <h1 class="privacy-title">Privacy e Cookies</h1>
+                        <p class="privacy-subtitle">Informazioni sui cookies e protezione dati</p>
+                    </div>
+
+                    <div class="privacy-grid">
+                        <div class="privacy-section">
+                            <h2>Cookies Utilizzati</h2>
+                            
+                            <div class="cookie-category">
+                                <h3>Cookies Tecnici</h3>
+                                <p>Essenziali per il funzionamento del sito (sempre attivi):</p>
+                                <ul class="privacy-list">
+                                    <li>Cookies di sessione e preferenze</li>
+                                    <li>Cookies di consenso (durata: 365 giorni)</li>
+                                    <li>Cookies di sicurezza</li>
+                                </ul>
+                            </div>
+
+                            <div class="cookie-category">
+                                <h3>Cookies di Terze Parti</h3>
+                                <p>Questi servizi vengono caricati solo dopo il tuo consenso esplicito:</p>
+                                <ul class="privacy-list">
+                                    <li><strong>Google Maps:</strong> Visualizzazione mappa interattiva contatti (caricato solo su consenso) - <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+                                </ul>
+                                <p><strong>Nota:</strong> I font tipografici (Google Fonts) sono ospitati localmente e non inviano dati a terze parti.</p>
+                            </div>
+                        </div>
+
+                        <div class="privacy-section">
+                            <h2>Base Giuridica e Diritti</h2>
+                            <p>Trattamento conforme al <strong>GDPR (UE 2016/679)</strong> e <strong>Codice Privacy italiano (D.Lgs. 196/2003)</strong>.</p>
+                            
+                            <h3>I Tuoi Diritti</h3>
+                            <ul class="privacy-list">
+                                <li>Accesso, rettifica e cancellazione dei dati</li>
+                                <li>Opposizione al trattamento</li>
+                                <li>Portabilità dei dati</li>
+                            </ul>
+                        </div>
+
+                        <div class="privacy-section">
+                            <h2>Gestione Cookies</h2>
+                            
+                            <div class="cookie-management">
+                                <p>Modifica le tue preferenze:</p>
+                                
+                                <div class="cookie-action">
+                                    <button onclick="modifyConsent()" class="btn btn--secondary">Modifica Preferenze Cookies</button>
+                                </div>
+                                
+                                <p>Oppure gestisci i cookies dalle impostazioni del tuo browser (sezione Privacy/Cookies).</p>
+                            </div>
+                        </div>
+
+                        <div class="privacy-section">
+                            <h2>Contatti per la Privacy</h2>
+                            <p>Per qualsiasi domanda riguardante la privacy e l'utilizzo dei cookies, puoi contattarci:</p>
+                            
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <h4>Titolare del Trattamento</h4>
+                                    <p>Autoscuola Carbonin<br>
+                                    Viale Trento e Trieste, 10D<br>
+                                    31100 Treviso (TV)</p>
+                                </div>
+                                <div class="contact-item">
+                                    <h4>Email</h4>
+                                    <p><a href="mailto:info@autoscuolacarbonin.com">info@autoscuolacarbonin.com</a></p>
+                                </div>
+                                <div class="contact-item">
+                                    <h4>Telefono</h4>
+                                    <p><a href="tel:+390422590972">Tel: 0422 590972 <br> Cell: 339 118 9195</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="privacy-section">
+                            <h2>Aggiornamenti</h2>
+                            <p class="last-update"><strong>Ultimo aggiornamento:</strong> 18/07/2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/cookies.js"></script>
+    <script>
+        // Carica il footer dinamico per la pagina privacy (che è nella root)
+        async function loadFooter() {
+            try {
+                const response = await fetch('components/footer.html');
+                const html = await response.text();
+                document.getElementById('footer-placeholder').innerHTML = html;
+            } catch (error) {
+                console.error('Errore nel caricamento del footer:', error);
+            }
+        }
+
+        // Gestisce il pulsante per modificare le preferenze cookies
+        function modifyConsent() {
+            // Resetta il consenso e torna alla homepage
+            if (window.cookieBanner) {
+                window.cookieBanner.resetConsent();
+            } else {
+                // Fallback se cookieBanner non è disponibile
+                document.cookie = 'autoscuola_cookie_consent=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Inizializza la pagina
+        document.addEventListener('DOMContentLoaded', loadFooter);
+    </script>
+</body>
+</html>

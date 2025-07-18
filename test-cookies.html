@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cookie Banner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div style="padding: 2rem; text-align: center;">
+        <h1>Test Cookie Banner</h1>
+        <p>Questa pagina serve per testare il banner dei cookies.</p>
+        <button onclick="cookieBanner.resetConsent()" style="padding: 1rem; background: #dc2626; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Reset Consenso Cookies
+        </button>
+        <br><br>
+        <button onclick="cookieBanner.showDetails()" style="padding: 1rem; background: #6b7280; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Mostra Dettagli Cookies
+        </button>
+        <br><br>
+        <a href="privacy-cookies.html" target="_blank" style="padding: 1rem; background: #059669; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+            Apri Pagina Privacy
+        </a>
+    </div>
+
+    <script src="js/cookies.js"></script>
+</body>
+</html>

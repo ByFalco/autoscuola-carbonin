@@ -333,12 +333,7 @@ class PerformanceOptimizer {
     }
 
     preloadCriticalResources() {
-        // Preload fonts
-        const fontLink = document.createElement('link');
-        fontLink.rel = 'preload';
-        fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
-        fontLink.as = 'style';
-        document.head.appendChild(fontLink);
+        // Font Inter già caricato localmente tramite inter.css
     }
 
     setupServiceWorker() {
