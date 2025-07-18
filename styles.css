@@ -2354,6 +2354,7 @@ body {
     .arrow-annotation__svg {
         width: 45px;
         height: 30px;
+        transform: rotate(60deg);
     }
     
     .home__stats {
@@ -2477,7 +2478,7 @@ body {
     .arrow-annotation__svg {
         width: 40px;
         height: 25px;
-        transform: rotate(60deg);
+        transform: rotate(45deg);
     }
     
     .home__badge {
