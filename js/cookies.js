@@ -8,20 +8,19 @@ class CookieBanner {
         this.cookieName = 'autoscuola_cookie_consent';
         this.cookieExpiry = 365; // giorni
         this.banner = null;
+        this.preferences = {
+            maps: false
+        };
         this.init();
     }
 
     init() {
-        // Controlla se il consenso è già stato dato
-        if (!this.hasConsent()) {
+        const consent = this.getCookie(this.cookieName);
+        if (!consent) {
             this.createBanner();
             this.showBanner();
         } else {
-            // Se i cookie sono già stati accettati, carica automaticamente i servizi
-            const consentValue = this.getCookie(this.cookieName);
-            if (consentValue === 'accepted') {
-                this.enableAllCookies();
-            }
+            this.applyConsent(consent);
         }
     }
 
@@ -41,17 +40,35 @@ class CookieBanner {
                             Utilizzo dei Cookies
                         </h3>
                         <p class="cookie-banner__text">
-                            Questo sito utilizza cookies tecnici e di terze parti (Google Maps) per migliorare la tua esperienza di navigazione. 
+                            Questo sito utilizza cookies tecnici e, con il tuo consenso, cookies di terze parti (Google Maps) per migliorare la tua esperienza.
                             <a href="#" class="cookie-banner__link" onclick="cookieBanner.showDetails()">Maggiori informazioni</a>
                         </p>
                     </div>
                     <div class="cookie-banner__actions">
-                        <button class="cookie-banner__btn cookie-banner__btn--decline" onclick="cookieBanner.decline()">
-                            Rifiuta
-                        </button>
-                        <button class="cookie-banner__btn cookie-banner__btn--accept" onclick="cookieBanner.accept()">
-                            Accetta tutti
-                        </button>
+                        <button class="cookie-banner__btn" onclick="cookieBanner.decline()">Rifiuta tutti</button>
+                        <button class="cookie-banner__btn" onclick="cookieBanner.showPreferences()">Personalizza</button>
+                        <button class="cookie-banner__btn" onclick="cookieBanner.accept()">Accetta tutti</button>
+                    </div>
+                </div>
+                <div class="cookie-preferences" id="cookiePreferences">
+                    <div class="cookie-banner__container">
+                        <div class="cookie-preferences__header">
+                            <h4 class="cookie-preferences__title">Personalizza Consenso</h4>
+                            <p class="cookie-preferences__description">Puoi scegliere quali cookies abilitare. Le tue preferenze verranno salvate per 365 giorni.</p>
+                        </div>
+                        <div class="cookie-preference-item">
+                            <div class="cookie-preference-item__info">
+                                <label for="maps-cookie">Google Maps</label>
+                                <p>Utilizzato per visualizzare mappe interattive e fornire indicazioni stradali.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="maps-cookie" data-cookie="maps">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="cookie-preferences__actions">
+                            <button class="cookie-banner__btn" onclick="cookieBanner.savePreferences()">Salva Preferenze</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,10 +104,10 @@ class CookieBanner {
         this.hideBanner();
         this.enableAllCookies();
         
-        // Analytics event (se implementato in futuro)
         if (typeof gtag !== 'undefined') {
             gtag('consent', 'update', {
-                'analytics_storage': 'granted'
+                'analytics_storage': 'granted',
+                'ad_storage': 'granted'
             });
         }
     }
@@ -100,10 +117,10 @@ class CookieBanner {
         this.hideBanner();
         this.disableNonEssentialCookies();
         
-        // Analytics event (se implementato in futuro)
         if (typeof gtag !== 'undefined') {
             gtag('consent', 'update', {
-                'analytics_storage': 'denied'
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied'
             });
         }
     }
@@ -123,62 +140,112 @@ class CookieBanner {
     }
 
     enableAllCookies() {
-        // Abilita tutti i servizi che richiedono cookies
         console.log('Cookies accettati - Tutti i servizi abilitati');
+        this.preferences.maps = true;
         this.loadMaps();
     }
 
-    // Nuova funzione per gestire la richiesta di caricamento mappa
-    requestMapLoad() {
-        // Controlla se i cookies sono stati accettati
-        const consentValue = this.getCookie(this.cookieName);
-        
-        if (consentValue === 'accepted') {
-            // Se i cookies sono accettati, carica la mappa
-            this.loadMaps();
+    applyConsent(consent) {
+        if (consent === 'accepted') {
+            this.enableAllCookies();
+        } else if (consent === 'declined') {
+            this.disableNonEssentialCookies();
         } else {
-            // Se i cookies non sono accettati, mostra il banner
-            if (!this.hasConsent()) {
-                // Se non c'è ancora una decisione, crea e mostra il banner
-                this.createBanner();
-                this.showBanner();
-            } else if (consentValue === 'declined') {
-                // Se i cookies sono stati rifiutati, mostra un messaggio informativo
-                this.showMapConsentMessage();
+            try {
+                this.preferences = JSON.parse(consent);
+                this.enableCookiesFromPreferences();
+            } catch (e) {
+                console.error("Errore durante il parsing delle preferenze dei cookie", e);
+                this.disableNonEssentialCookies();
             }
         }
     }
 
-    // Funzione per mostrare un messaggio quando i cookies sono stati rifiutati
+    showPreferences() {
+        const prefsPanel = document.getElementById('cookiePreferences');
+        if (prefsPanel) {
+            const isVisible = prefsPanel.classList.toggle('show');
+            // Pre-check switches based on current preferences
+            if (isVisible) {
+                const mapsSwitch = document.querySelector('#maps-cookie');
+                if (mapsSwitch) {
+                    mapsSwitch.checked = this.preferences.maps;
+                }
+            }
+        }
+    }
+
+    savePreferences() {
+        const mapsSwitch = document.querySelector('#maps-cookie');
+        this.preferences.maps = mapsSwitch ? mapsSwitch.checked : false;
+
+        this.setCookie(this.cookieName, JSON.stringify(this.preferences), this.cookieExpiry);
+        this.hideBanner();
+        this.enableCookiesFromPreferences();
+    }
+
+    enableCookiesFromPreferences() {
+        console.log('Cookies abilitati in base alle preferenze');
+        if (this.preferences.maps) {
+            this.loadMaps();
+        }
+    }
+
+    requestMapLoad() {
+        const consentValue = this.getCookie(this.cookieName);
+
+        if (consentValue === 'accepted') {
+            this.loadMaps();
+            return;
+        }
+
+        if (consentValue && consentValue !== 'declined') {
+            try {
+                const prefs = JSON.parse(consentValue);
+                if (prefs.maps) {
+                    this.loadMaps();
+                    return;
+                }
+            } catch (e) {
+                // Non è un JSON valido, procedi
+            }
+        }
+
+        // Se arriviamo qui, il consenso non è stato dato per le mappe.
+        this.showMapConsentMessage();
+    }
+
+    // Funzione per mostrare un messaggio quando il consenso per le mappe non è stato dato
     showMapConsentMessage() {
         const placeholder = document.getElementById('maps-placeholder');
-        if (placeholder) {
-            // Crea un messaggio temporaneo
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'maps-consent-message';
-            messageDiv.innerHTML = `
-                <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 6px; margin: 2px 0; text-align: center;">
-                    <p style="margin: 0 0 6px 0; font-size: 12px; color: #6c757d;">
-                        Google Maps utilizza cookies<br>per fornire il servizio di mappe.
-                    </p>
-                    <button onclick="cookieBanner.showConsentOptions()" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
-                        Gestisci Consenso
-                    </button>
-                </div>
-            `;
-            
-            // Inserisce il messaggio dopo il contenuto del placeholder
-            const content = placeholder.querySelector('.maps-placeholder__content');
-            if (content) {
-                content.appendChild(messageDiv);
-                
-                // Rimuove il messaggio dopo 5 secondi
-                setTimeout(() => {
-                    if (messageDiv.parentNode) {
-                        messageDiv.parentNode.removeChild(messageDiv);
-                    }
-                }, 5000);
-            }
+        if (!placeholder) return;
+
+        // Se il messaggio esiste già, non fare nulla
+        if (placeholder.querySelector('.maps-consent-message')) return;
+
+        // Nascondi il pulsante originale "Carica Mappa"
+        const originalButton = placeholder.querySelector('.maps-placeholder__btn');
+        if (originalButton) {
+            originalButton.style.display = 'none';
+        }
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'maps-consent-message';
+        messageDiv.style.textAlign = 'center';
+        messageDiv.style.marginTop = '1rem';
+
+        messageDiv.innerHTML = `
+            <p style="margin: 0 0 10px 0; font-size: 14px; color: #6c757d;">
+                Per visualizzare la mappa, è necessario il consenso.
+            </p>
+            <button onclick="cookieBanner.showConsentOptions()" class="cookie-banner__btn">
+                Gestisci Consenso
+            </button>
+        `;
+        
+        const content = placeholder.querySelector('.maps-placeholder__content');
+        if (content) {
+            content.appendChild(messageDiv);
         }
     }
 
@@ -215,10 +282,8 @@ class CookieBanner {
     }
 
     disableNonEssentialCookies() {
-        // Disabilita i cookies non essenziali
         console.log('Cookies non essenziali disabilitati');
-        
-        // Rimuove eventuali cookies di terze parti esistenti
+        this.preferences.maps = false;
         this.removeThirdPartyCookies();
     }
 

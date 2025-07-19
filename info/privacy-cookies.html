@@ -87,7 +87,7 @@
                                 <p>Modifica le tue preferenze:</p>
                                 
                                 <div class="cookie-action">
-                                    <button onclick="modifyConsent()" class="btn btn--secondary">Modifica Preferenze Cookies</button>
+                                    <button onclick="cookieBanner.showConsentOptions()" class="btn btn--secondary">Modifica Preferenze Cookies</button>
                                 </div>
                                 
                                 <p>Oppure gestisci i cookies dalle impostazioni del tuo browser (sezione Privacy/Cookies).</p>
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="contact-item">
                                     <h4>Telefono</h4>
-                                    <p><a href="tel:+390422590972">Tel: 0422 590972 <br> Cell: 339 118 9195</a></p>
+                                    <p><a href="tel:+390422590972">Tel:+39 0422 590972 <br> Cell:+39 339 118 9195</a></p>
                                 </div>
                             </div>
                         </div>
@@ -142,17 +142,10 @@
             }
         }
 
-        // Gestisce il pulsante per modificare le preferenze cookies
-        function modifyConsent() {
-            // Resetta il consenso e torna alla homepage
-            if (window.cookieBanner) {
-                window.cookieBanner.resetConsent();
-            } else {
-                // Fallback se cookieBanner non è disponibile
-                document.cookie = 'autoscuola_cookie_consent=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
-                window.location.href = '../index.html';
-            }
-        }
+        // La funzione modifyConsent è ora gestita da showConsentOptions in cookies.js
+        // che mostra nuovamente il banner per una nuova scelta.
+        // La vecchia funzione resetConsent() ricaricava la pagina, 
+        // mentre la nuova implementazione offre un'esperienza più fluida.
 
         // Inizializza la pagina
         document.addEventListener('DOMContentLoaded', loadFooter);
