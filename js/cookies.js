@@ -6,7 +6,7 @@
 class CookieBanner {
     constructor() {
         this.cookieName = 'autoscuola_cookie_consent';
-        this.cookieExpiry = 365; // giorni
+        this.cookieExpiry = 179; // giorni
         this.banner = null;
         this.preferences = {
             maps: false
