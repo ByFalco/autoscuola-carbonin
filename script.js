@@ -296,6 +296,20 @@ class ScrollAnimations {
     }
 }
 
+// ===== FOOTER YEAR =====
+class FooterYear {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        const yearElement = $('#year');
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+    }
+}
+
 // ===== PERFORMANCE OPTIMIZATIONS =====
 class PerformanceOptimizer {
     constructor() {
@@ -510,6 +524,7 @@ class App {
             new ScrollAnimations();
             new PerformanceOptimizer();
             new AccessibilityEnhancements();
+            new FooterYear();
             
             console.log('✅ Autoscuola Carbonin website initialized successfully');
         } catch (error) {
