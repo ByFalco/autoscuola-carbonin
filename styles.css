@@ -2980,8 +2980,8 @@ body {
     }
 }
 
-/* ===== ULTRA NARROW SCREENS (< 310px) ===== */
-@media screen and (max-width: 310px) {
+/* ===== ULTRA NARROW SCREENS (< 320px) ===== */
+@media screen and (max-width: 320px) {
 
     /* Stack buttons vertically on extremely narrow screens */
     .home__buttons {
