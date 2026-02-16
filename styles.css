@@ -600,7 +600,7 @@ body {
     height: 32px;
     fill: var(--primary-color);
     stroke: var(--primary-color);
-    transform: rotate(70deg);
+    transform: rotate(70deg) !important;
     animation: wiggle 3s ease-in-out infinite;
     order: 1;
 }
@@ -2597,7 +2597,6 @@ body {
     .arrow-annotation__svg {
         width: 40px;
         height: 25px;
-        transform: rotate(45deg) !important;
     }
 
     .home__badge {
@@ -2981,10 +2980,27 @@ body {
     }
 }
 
+/* ===== ULTRA NARROW SCREENS (< 310px) ===== */
+@media screen and (max-width: 310px) {
+
+    /* Stack buttons vertically on extremely narrow screens */
+    .home__buttons {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: unset !important;
+    }
+}
+
 /* ===== HEIGHT-BASED MEDIA QUERIES FOR SHORT SCREENS ===== */
 /* Handles landscape mode and devices with low viewport height */
 
-@media screen and (max-height: 620px) and (max-width: 768px) {
+@media screen and (max-height: 720px) and (max-width: 768px) {
 
     /* Reduce home section top padding on short screens */
     .home {
